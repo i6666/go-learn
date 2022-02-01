@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"math/cmplx"
 	"runtime"
 	"strings"
@@ -64,6 +65,96 @@ func main() {
 	//	fmt.Printf("2**%d = %d \n" ,i,v)
 	//}
 	//testMake()
+	//testMap1()
+	//testMap2()
+	//s := "I am learning Go Go !"
+	//
+	//var  result  map[string]int= wordCount(s)
+	//fmt.Println(result)
+	//testFun()
+
+	//pos, neg := adder(), adder()
+	//for i := 0; i < 10; i++ {
+	//	fmt.Println(
+	//		pos(i),
+	//		neg(-2*i),
+	//	)
+	//}
+	//
+	n := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(n())
+	}
+}
+
+// 返回一个“返回int的函数”
+func fibonacci() func() int {
+	x := 0
+	y := 1
+	return func() int {
+		j := x
+		x = y
+		y = j + y
+		return j
+	}
+}
+
+func testFun() {
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+	//fmt.Println(hypot(5,12))
+
+	fmt.Println(compute(hypot))
+	fmt.Println(compute(math.Pow))
+}
+
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+func wordCount(s string) map[string]int {
+	ss := strings.Split(s, " ")
+	m := make(map[string]int)
+
+	for _, si := range ss {
+		v, ok := m[si]
+		if ok {
+			v++
+		} else {
+			v = 1
+		}
+		m[si] = v
+	}
+	return m
+
+}
+
+func testMap2() {
+	m := make(map[string]int)
+	m["kangkang"] = 22
+	fmt.Println("the value", m["kangkang"])
+
+	m["kangkang"] = 50
+	fmt.Println("the value", m["kangkang"])
+
+	delete(m, "kangkang")
+
+	fmt.Println("delete the value", m["kangkang"])
+
+	//通过双赋值检测key 是否存在，不存在ok 返回false,否则为true
+	v, ok := m["kangkang"]
+	fmt.Println("ok = ", ok, "v = ", v)
+}
+
+func testMap1() {
 	m := make(map[string]Student)
 	m["kkk"] = Student{"kangkang", 23}
 
