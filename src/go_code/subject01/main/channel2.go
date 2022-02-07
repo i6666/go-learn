@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+//var name chan <- int 只能发送消息的channel
 func Producer(begin, end int, queue chan<- int) {
 	for i := begin; i < end; i++ {
 		fmt.Println("produce: >>>>>>>>>>>>>>>", i)
@@ -13,6 +14,7 @@ func Producer(begin, end int, queue chan<- int) {
 
 }
 
+//var name  <- chan int 只能接收消息的chanel
 func Consume(queue <-chan int) {
 	for val := range queue {
 		fmt.Println("consume:<<<<<<<<<<<<<<<", val)
